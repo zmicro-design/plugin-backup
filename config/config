@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export PLUGIN_BACKUP_NAME=backup
+
+export PLUGIN_BACKUP_DIR=$PLUGIN_DATA

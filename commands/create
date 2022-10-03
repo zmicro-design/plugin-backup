@@ -1,0 +1,39 @@
+#!/bin/bash
+
+help() {
+  echo "Usage:"
+  echo "  create <name> <dirs...>"
+}
+
+core() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  local name=$1
+  local dirs=${@:2}
+
+  if [ -z "$name" ]; then
+    os::inquirer name "text" "Backup Name?" true
+    os::inquirer dirs "text" "Backup Directory?" true
+
+    log::info "############## Backup Info ##############"
+    log::info "# Backup Name: $name"
+    log::info "# Backup Directory: $dirs"
+    log::info "############## Backup Info ##############"
+    log::info ""
+    os::inquirer yesno "yesno" "Are you sure you want to backup ?"
+    if [ "$yesno" != "true" ]; then
+      exit 1
+    fi
+  fi
+
+  backup::create $name $dirs
+}
+
+run() {
+  core $@
+}
+
+run $@

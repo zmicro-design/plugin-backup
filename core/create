@@ -1,0 +1,30 @@
+#!/bin/bash
+
+backup::create() {
+  local name=$1
+  local dirs=${@:2}
+
+  if [ -z "$name" ]; then
+    log::error "[backup::create] name is required"
+    return 1
+  fi
+
+  if [ -z "$dirs" ]; then
+    log::error "[backup::create] dirs is required"
+    return 1
+  fi
+
+  local backup_filepath=$(backup::get_filename $name)
+
+  log::info "backup $backup_filepath with dirs: $dirs ..."
+  sudo tar -zcvf $backup_filepath $dirs
+  if [ "$?" != "0" ]; then
+    log::error "[backup::create] failed to create backup file: $backup_filepath"
+    return 1
+  else
+    log::success "[backup::create] successfully created backup file: $backup_filepath"
+    return 0
+  fi
+}
+
+export -f backup::create

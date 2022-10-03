@@ -1,0 +1,34 @@
+#!/bin/bash
+
+name() {
+  local version=$(plugin::get_version $PLUGIN_BACKUP_NAME)
+  echo "Backup ($(color::success $version))"
+}
+
+description() {
+  # @TODO
+  config::load_file $PLUGIN_DIR/mod
+
+  echo "$PLUGIN_DESCRIPTION"
+}
+
+usage() {
+  echo "Usage: backup <command> [args...]"
+  echo ""
+  echo "Commands:"
+  echo "  create               - Create a backup for specified dirs"
+}
+
+core() {
+  name
+  echo ""
+  description
+  echo ""
+  usage
+}
+
+run() {
+  core $@
+}
+
+run $@

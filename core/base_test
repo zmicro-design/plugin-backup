@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function test_backup::get_filename() {
+  local expected="$PLUGIN_BACKUP_DIR/backup_swarm_$(date +%Y%m%d).tar.gz"
+  local received=$(backup::get_filename swarm)
+
+  testing::expect \
+    "${FUNCNAME[0]}" \
+    "to_equal" \
+    "$expected" \
+    "$received"
+}
