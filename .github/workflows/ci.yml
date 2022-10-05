@@ -8,7 +8,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '0 2 * * *'
+    - cron: "0 2 * * *"
 
 jobs:
   on-success:
@@ -20,7 +20,7 @@ jobs:
         uses: whatwewant/action-robot-feishu@v0.0.13
         with:
           url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
-          title: '✅ 自动化测试：${{ github.repository }}'
+          title: "✅ 自动化测试：${{ github.repository }}"
           text: |
             分支: ${{ github.ref }}
             提交信息: ${{ github.event.head_commit.message }}
@@ -36,7 +36,7 @@ jobs:
         uses: whatwewant/action-robot-feishu@v0.0.13
         with:
           url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
-          title: '❌ 自动化测试：${{ github.repository }}'
+          title: "❌ 自动化测试：${{ github.repository }}"
           text: |
             分支: ${{ github.ref }}
             提交信息: ${{ github.event.head_commit.message }}
@@ -53,7 +53,7 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          fetch-depth: '0'
+          fetch-depth: "0"
 
       - name: Install
         run: ./install
@@ -61,4 +61,4 @@ jobs:
       - name: Show Version
         run: |
           export PATH=/usr/local/lib/zmicro/bin:$PATH
-          backup version
+          zbackup version
