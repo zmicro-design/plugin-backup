@@ -16,6 +16,18 @@ backup::create() {
 
   local backup_filepath=$(backup::get_filename $name)
 
+  for dir in $dirs; do
+    if [ ! -d "$dir" ]; then
+      log::error "[backup::create] backup dir ($dir) not found"
+      return 1
+    fi
+
+    if [ -z "$(ls $dir)" ]; then
+      log::error "[backup::create] backup dir ($dir) is empty"
+      return 1
+    fi
+  done
+
   log::info "backup $backup_filepath with dirs: $dirs ..."
   sudo tar -zcvf $backup_filepath $dirs
   if [ "$?" != "0" ]; then
