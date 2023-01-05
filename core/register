@@ -1,0 +1,21 @@
+#!/bin/bash
+
+backup::register() {
+  local name="$1"
+  local dirs="$2"
+  local cron="$3"
+
+  local cron_underline=$(backup::util_string_star2underline "$cron")
+  # echo "XXX: $cron => $cron_underline"
+  
+  zmicro cron create "zmicro_backup_$name" $cron_underline zmicro backup create "$name" "$dirs"
+}
+
+# example: 0 1 */1 * * => 0 1 _/1 _ _
+backup::util_string_star2underline() {
+  string::replace "$1" "*" "_"
+}
+
+export -f backup::register
+
+export -f backup::util_string_star2underline
