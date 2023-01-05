@@ -24,6 +24,10 @@ core() {
   if [ -z "$name" ]; then
     os::inquirer name "text" "Backup Name" true
     os::inquirer data_dir "text" "Backup Directory" true
+    if [ "${data_dir:0:1}" = "$" ]; then
+      data_dir=$(eval "echo $data_dir")
+    fi
+
     if [ ! -d "$data_dir" ]; then
       log::error "[$(timestamp)] backup data dir (${data_dir}) not found"
       exit 1
