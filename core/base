@@ -7,7 +7,7 @@ backup::get_filename() {
     return 1
   fi
 
-  local timestamp=$(date +%Y%m%d)
+  local timestamp=$(date +%Y_%m_%d_%H_%M)
   echo "${PLUGIN_BACKUP_DIR}/backup_${name}_${timestamp}.tar.gz"
 }
 
