@@ -92,7 +92,7 @@ core() {
       cron_pattern="0 $cron_hour */1 * *"
       ;;
     weekly)
-      cron_pattern="0 $cron_hour * * */1"
+      cron_pattern="0 $cron_hour * * 0"
       ;;
     monthly)
       cron_pattern="0 $cron_hour * */1 *"
