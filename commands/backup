@@ -1,0 +1,31 @@
+#!/bin/bash
+
+help() {
+  echo "Backup one directory"
+  echo ""
+  echo "Usage:"
+  echo "  backup <dir>"
+}
+
+core() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  local dir=$1
+  if [ -z "$dir" ]; then
+    log::error "[$(timestamp)] dir is required"
+    return 1
+  fi
+
+  local name=$(echo $dir | sed 's%/%_%g')
+
+  backup::create $name $dir
+}
+
+run() {
+  core $@
+}
+
+run $@
