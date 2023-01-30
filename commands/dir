@@ -4,7 +4,7 @@ help() {
   echo "Backup one directory"
   echo ""
   echo "Usage:"
-  echo "  backup <dir>"
+  echo "  dir <dir>"
 }
 
 core() {

@@ -16,7 +16,9 @@ usage() {
   echo "Usage: backup <command> [args...]"
   echo ""
   echo "Commands:"
-  echo "  create               - Create a backup for specified dirs"
+  echo "  create               - Backup dirs"
+  echo "  dir                  - Backup only one directory"
+  echo "  register             - Create a cron backup task"
 }
 
 core() {
