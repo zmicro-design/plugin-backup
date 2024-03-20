@@ -31,7 +31,7 @@ backup::create() {
   log::info "backup $backup_filepath with dirs: $dirs ..."
   # sudo tar -zcvf $backup_filepath $dirs
   # donot need force sudo
-  tar -zcvf $backup_filepath $dirs
+  tar -Jcvf $backup_filepath $dirs
   if [ "$?" != "0" ]; then
     log::error "[backup::create] failed to create backup file: $backup_filepath"
     return 1
