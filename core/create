@@ -14,6 +14,7 @@ backup::create() {
     return 1
   fi
 
+  local backup_basename=$(backup::get_basename $name)
   local backup_filepath=$(backup::get_filename $name)
 
   for dir in $dirs; do
@@ -25,6 +26,18 @@ backup::create() {
     if [ -z "$(ls $dir)" ]; then
       log::error "[backup::create] backup dir ($dir) is empty"
       return 1
+    fi
+  done
+
+  # only backup the latest 10 versions
+  for file in $(find ${PLUGIN_BACKUP_DIR} -name "${backup_basename}_*" -type f | sort -r | tail -n +10); do
+    if [ -f "$file" ]; then
+      log::info "[$(timestamp)] clean old backup file: $file ..."
+      rm -f $file
+      if [ "$?" != "0" ]; then
+        log::error "[backup::create] failed to clean old backup file: $file"
+        return 1
+      fi
     fi
   done
 
