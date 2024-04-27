@@ -2,4 +2,8 @@
 
 export PLUGIN_BACKUP_NAME=backup
 
-export PLUGIN_BACKUP_DIR=$PLUGIN_DATA
+export PLUGIN_BACKUP_DIR=${PLUGIN_BACKUP_DIR:-$PLUGIN_DATA}
+
+if [ "$(string::ends_with $PLUGIN_BACKUP_DIR /)" != "true" ]; then
+  export PLUGIN_BACKUP_DIR="${PLUGIN_BACKUP_DIR}/"
+fi
