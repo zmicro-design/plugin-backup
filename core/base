@@ -18,7 +18,7 @@ backup::get_filename() {
   fi
 
   local timestamp=$(date +%Y_%m_%d_%H_%M)
-  echo "${PLUGIN_BACKUP_DIR}/backup_${name}_${timestamp}.tar.xz"
+  echo "${PLUGIN_BACKUP_DIR}backup_${name}_${timestamp}.tar.xz"
 }
 
 export -f backup::get_basename
